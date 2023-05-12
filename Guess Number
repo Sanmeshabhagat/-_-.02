@@ -1,0 +1,42 @@
+import javax.swing.*;
+import java.awt.event.*;
+
+public class GuessNumber {
+    
+    public static void main(String[] args) {
+        JFrame frame = new JFrame("Guessing Game");
+        frame.setSize(400, 250);
+
+        JPanel panel = new JPanel();
+        JLabel promptLabel = new JLabel("Guess a number between 1 and 100:");
+        JTextField inputField = new JTextField(10);
+        JButton submitButton = new JButton("Submit Guess");
+        panel.add(promptLabel);
+        panel.add(inputField);
+        panel.add(submitButton);
+
+        int secretNumber = (int)(Math.random()*100) + 1;
+        submitButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                game(inputField, secretNumber, frame);
+            }
+        });
+
+        frame.add(panel);
+        frame.setVisible(true);
+    }
+    
+    public static void game(JTextField inputField, int secretNumber, JFrame frame) {
+        int userGuess = Integer.parseInt(inputField.getText());
+        if(userGuess == secretNumber) {
+            JOptionPane.showMessageDialog(frame, "You guessed the number correctly!");
+            System.exit(0);
+        }
+        else if(userGuess < secretNumber) {
+            JOptionPane.showMessageDialog(frame, "Your guess is too low. Try again!");
+        }
+        else {
+            JOptionPane.showMessageDialog(frame, "Your guess is too high. Try again!");
+        }
+    }
+}
